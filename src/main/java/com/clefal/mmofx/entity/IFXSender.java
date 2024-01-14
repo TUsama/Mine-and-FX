@@ -7,14 +7,11 @@ import com.robertx22.age_of_exile.database.data.spells.entities.IDatapackSpellEn
 import com.robertx22.age_of_exile.database.data.spells.entities.SimpleProjectileEntity;
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import static com.clefal.mmofx.common.data.FXUtilities.getPlayerWithinRange;
 

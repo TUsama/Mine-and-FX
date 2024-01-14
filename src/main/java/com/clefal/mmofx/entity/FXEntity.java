@@ -10,9 +10,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRende
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -91,8 +89,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
                     .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
         }
 
-        playerList.forEach(serverPlayer -> serverPlayer.sendSystemMessage(Component.literal("dead now: " + this.getStringUUID())));
-
         super.remove(r);
     }
 
@@ -108,7 +104,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
 
         if(!this.level().isClientSide){
             sendTickFXPackets(this.playerList, this, 128.0D);
-            playerList.forEach(serverPlayer -> serverPlayer.sendSystemMessage(Component.literal("still here: " + this.getStringUUID() + ", My world is：" + this.level())));
         }
 
 

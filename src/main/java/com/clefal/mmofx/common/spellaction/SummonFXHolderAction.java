@@ -60,12 +60,6 @@ public class SummonFXHolderAction extends SpellAction {
                 FXEntity en = new FXEntity(world, false);
                 SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
                 en.setPos(finalPos);
-                getPlayerWithinRange(finalPos, world, 128.0D)
-                        .stream()
-                        .toList()
-                        .forEach(serverPlayer ->
-                                serverPlayer.sendSystemMessage(Component.literal("summon non-follow one: " + en.getStringUUID())));
-
                 ctx.world.addFreshEntity(en);
             }
         }}

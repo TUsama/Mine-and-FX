@@ -3,8 +3,6 @@ package com.clefal.mmofx.common.spellmodify;
 import com.robertx22.age_of_exile.database.data.spells.components.ComponentPart;
 import com.robertx22.age_of_exile.database.data.spells.components.EntityActivation;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
 

@@ -1,7 +1,5 @@
 package com.clefal.mmofx;
 
-import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayerGUIs;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 

@@ -2,7 +2,6 @@ package com.clefal.mmofx.mixins;
 
 import com.clefal.mmofx.entity.IFXSender;
 import com.robertx22.age_of_exile.database.data.spells.entities.SimpleProjectileEntity;
-import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

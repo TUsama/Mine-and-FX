@@ -4,8 +4,6 @@ import com.clefal.mmofx.common.spellaction.FXSpellAction;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.database.data.spells.components.ComponentPart;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;

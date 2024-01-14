@@ -3,10 +3,8 @@ package com.clefal.mmofx.common.effect;
 import com.lowdragmc.photon.client.emitter.IParticleEmitter;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXEffect;
-import com.lowdragmc.photon.client.fx.FXHelper;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector3f;
 
 import java.util.UUID;
