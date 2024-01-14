@@ -5,14 +5,9 @@ import java.util.List;
 
 public class FXCache {
     public static void init(){
-        FX_CACHE.add("chilling_field");
-        FX_CACHE.add("fire_nova");
-        FX_CACHE.add("fireball");
-        FX_CACHE.add("frozen_orb");
-        FX_CACHE.add("heart_of_ice");
-        FX_CACHE.add("ice_shard");
-        FX_CACHE.add("refresh");
-        
+        List<String> list =List.of("chilling_field", "fire_nova", "fireball", "frozen_orb", "heart_of_ice", "ice_shard", "refresh", "frost_nova");
+        FX_CACHE.addAll(list);
+
     }
 
     public static List<String> FX_CACHE = new ArrayList<>();
