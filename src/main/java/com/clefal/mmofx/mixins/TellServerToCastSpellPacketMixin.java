@@ -11,7 +11,7 @@ import static com.clefal.mmofx.common.spellmodify.SpellModifierFactory.getModifi
 
 @Mixin(TellServerToCastSpellPacket.class)
 public class TellServerToCastSpellPacketMixin {
-    @ModifyVariable(method = "onReceived", at = @At(value = "INVOKE",
+    /*@ModifyVariable(method = "onReceived", at = @At(value = "INVOKE",
             target = "Lcom/robertx22/age_of_exile/vanilla_mc/packets/spells/TellServerToCastSpellPacket;tryCastSpell(Lnet/minecraft/world/entity/player/Player;Lcom/robertx22/age_of_exile/database/data/spells/components/Spell;)Z"),
             remap = false,
             name = "spell"
@@ -19,5 +19,5 @@ public class TellServerToCastSpellPacketMixin {
     private Spell modifySpell(Spell value){
         ISpellModifier modifier = getModifier(value.identifier);
         return modifier != null ? modifier.modify(value) : value;
-    }
+    }*/
 }

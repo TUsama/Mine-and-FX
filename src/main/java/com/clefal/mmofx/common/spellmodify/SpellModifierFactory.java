@@ -1,6 +1,7 @@
 package com.clefal.mmofx.common.spellmodify;
 
 import com.clefal.mmofx.common.spellmodify.spellmodifiers.FireNovaModify;
+import com.clefal.mmofx.common.spellmodify.spellmodifiers.FrostNovaModify;
 import com.clefal.mmofx.common.spellmodify.spellmodifiers.ISpellModifier;
 
 import javax.annotation.Nullable;
@@ -17,5 +18,6 @@ public class SpellModifierFactory {
 
     public static void init(){
         modifiers.put("fire_nova", new FireNovaModify());
+        modifiers.put("frost_nova", new FrostNovaModify());
     }
 }

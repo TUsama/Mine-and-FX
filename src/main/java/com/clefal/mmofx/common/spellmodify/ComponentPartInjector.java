@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
 
-public class SpellInjector {
+public class ComponentPartInjector {
 
 
     public static Spell injectOnCast(Spell spell, ComponentPart... parts){

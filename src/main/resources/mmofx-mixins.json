@@ -8,7 +8,8 @@
     "StationaryFallingBlockEntityMixin",
     "SimpleProjectileEntityMixin",
     "ParticleInRadiusActionMixin",
-    "TellServerToCastSpellPacketMixin"
+    "AttachedSpellMixin"
+
   ],
   "client": [
   ],
