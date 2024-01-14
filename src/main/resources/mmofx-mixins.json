@@ -1,0 +1,18 @@
+{
+  "minVersion": "0.8",
+  "required": true,
+  "refmap": "mmofx.refmap.json",
+  "package": "com.clefal.mmofx.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "StationaryFallingBlockEntityMixin",
+    "SimpleProjectileEntityMixin",
+    "ParticleInRadiusActionMixin",
+    "TellServerToCastSpellPacketMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
