@@ -36,9 +36,7 @@ public class FXConfigCheckerPacket extends MyPacket<FXConfigCheckerPacket> {
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
-        Minecraft.getInstance().player.displayClientMessage(Component.literal("get feedback!"), false);
         writeFXConfigValueFromPacket(ctx.getPlayer(), this.ifFXEnable);
-        Minecraft.getInstance().player.displayClientMessage(Component.literal("player FX status: " + ifFXEnable), false);
     }
 
     @Override

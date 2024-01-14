@@ -62,14 +62,14 @@ public class sendSpellEntityPositionPacket extends MyPacket<sendSpellEntityPosit
         }
 
         if (clientPlayerEntityFXHolder.containsKey(this.entityUUID)){
-            Minecraft.getInstance().player.displayClientMessage(Component.literal("update one"), false);
+            
             val positionEffect = clientPlayerEntityFXHolder.get(this.entityUUID);
             positionEffect.setNewPos(this.pos);
             positionEffect.setLifespan(0);
         } else {
             Optional<FX> FXResource = Optional.ofNullable(FXHelper.getFX(getSkillFXFromRawString(skillIdentifier)));
             if(FXResource.isPresent()){
-                Minecraft.getInstance().player.displayClientMessage(Component.literal("create one"), false);
+                
                 val effect = new PositionEffect(this.entityUUID, FXResource.get(), pos);
                 clientPlayerEntityFXHolder.put(this.entityUUID, effect);
                 effect.start();

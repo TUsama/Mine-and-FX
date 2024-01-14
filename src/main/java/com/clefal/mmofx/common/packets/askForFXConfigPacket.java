@@ -36,10 +36,9 @@ public class askForFXConfigPacket extends MyPacket<askForFXConfigPacket> {
         if(!ctx.getPlayer().level().isClientSide){
             return;
         }
-        Minecraft.getInstance().player.displayClientMessage(Component.literal("get ask!"), false);
+        
         var callback = new FXConfigCheckerPacket();
         if(ModList.get().getMods().stream().map(IModInfo::getModId).anyMatch(s -> s.contentEquals("photon"))){
-            Minecraft.getInstance().player.displayClientMessage(Component.literal("send feedback!"), false);
             Packets.sendToServer(callback);
         }
     }
