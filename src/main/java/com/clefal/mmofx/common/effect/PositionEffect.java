@@ -62,6 +62,11 @@ public class PositionEffect extends FXEffect {
         }
     }
 
+    public PositionEffect startAndReturn(boolean b) {
+        this.start();
+        return this;
+    }
+
     @Override
     public boolean updateEmitter(IParticleEmitter emitter) {
         var finalNewPos = new Vector3f((float) (newPos.x + xOffset), (float) (newPos.y + yOffset), (float) (newPos.z + zOffset));

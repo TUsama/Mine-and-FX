@@ -6,10 +6,7 @@ import com.lowdragmc.photon.client.fx.FXHelper;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import lombok.val;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector3f;
 
@@ -57,24 +54,14 @@ public class sendSpellEntityPositionPacket extends MyPacket<sendSpellEntityPosit
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
-        if(!ctx.getPlayer().level().isClientSide()){
-            return;
-        }
 
-        if (clientPlayerEntityFXHolder.containsKey(this.entityUUID)){
-            
-            val positionEffect = clientPlayerEntityFXHolder.get(this.entityUUID);
+        Optional.ofNullable(clientPlayerEntityFXHolder.computeIfAbsent(this.entityUUID, x -> {
+            FX FXResource = FXHelper.getFX(getSkillFXFromRawString(skillIdentifier));
+            return FXResource == null ? null : new PositionEffect(this.entityUUID, FXResource, pos).startAndReturn(true);
+        })).ifPresent(positionEffect -> {
             positionEffect.setNewPos(this.pos);
             positionEffect.setLifespan(0);
-        } else {
-            Optional<FX> FXResource = Optional.ofNullable(FXHelper.getFX(getSkillFXFromRawString(skillIdentifier)));
-            if(FXResource.isPresent()){
-                
-                val effect = new PositionEffect(this.entityUUID, FXResource.get(), pos);
-                clientPlayerEntityFXHolder.put(this.entityUUID, effect);
-                effect.start();
-            }
-        }
+        });
     }
 
     @Override

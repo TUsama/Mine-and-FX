@@ -18,7 +18,7 @@ public class ConfigManager {
     b.comment("Client Configs")
             .push("general");
 
-    ENABLE_PHOTON_FX = b.define("enable_photon_fx", false);
+    ENABLE_PHOTON_FX = b.define("enable_photon_fx", true);
 
     b.pop();
   }
