@@ -1,6 +1,5 @@
 package com.clefal.mmofx.common.packets;
 
-import com.clefal.mmofx.ConfigManager;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
@@ -10,8 +9,6 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-
-import static com.clefal.mmofx.common.effect.FXCache.FX_CACHE;
 
 public class SpellParticlePacket extends MyPacket<SpellParticlePacket> {
     private MyPosition pos;

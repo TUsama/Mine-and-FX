@@ -11,6 +11,7 @@ public class S2CPacketRegister {
             Packets.registerServerToClient(MMORPG.NETWORK, new askForFXConfigPacket(), i++);
             Packets.registerServerToClient(MMORPG.NETWORK, new sendSpellEntityPositionPacket(), i++);
             Packets.registerServerToClient(MMORPG.NETWORK, new sendSpellEntityDeath(), i++);
+            Packets.registerServerToClient(MMORPG.NETWORK, new SpellParticlePacket(), i++);
 
     }
 }
