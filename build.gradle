@@ -171,7 +171,7 @@ dependencies {
      //optional integrations
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+1.20.1")
     implementation fg.deobf("curse.maven:library-of-exile-398780:4996322")
-    implementation fg.deobf("curse.maven:mine-and-slash-reloaded-306575:5005043")
+    implementation fg.deobf("curse.maven:mine-and-slash-reloaded-306575:5020842")
     implementation fg.deobf("com.lowdragmc.photon:photon-forge-1.20.1:1.0.7.a")
     implementation fg.deobf("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.22")
 
