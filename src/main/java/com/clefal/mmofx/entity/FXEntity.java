@@ -37,6 +37,8 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     CalculatedSpellData spellData;
     private Integer lifeSpan = 0;
 
+    //private Vec3 previousPosition = new Vec3(0, 0, 0);
+
 
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.STRING);
@@ -69,17 +71,9 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     }
 
 
-    protected void tickDespawn() {
-        ++this.lifeSpan;
-        if (this.lifeSpan >= getDeathTime()) {
-            this.scheduleRemoval();
-        }
-
-    }
 
     @Override
     public void remove(RemovalReason r) {
-
         LivingEntity caster = getCaster();
 
         if (caster != null) {
@@ -88,7 +82,7 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
                     .getAttached()
                     .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
         }
-
+        sendEndFXPackets(this.playerList,this);
         super.remove(r);
     }
 
@@ -96,16 +90,21 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     @Override
     public void tick() {
 
-        tickDespawn();
         if (this.removeNextTick) {
             this.remove(RemovalReason.KILLED);
             return;
         }
 
-        if(!this.level().isClientSide){
-            sendTickFXPackets(this.playerList, this, 128.0D);
+        ++this.lifeSpan;
+        if (this.lifeSpan >= getDeathTime()) {
+            this.scheduleRemoval();
         }
 
+        //if(!previousPosition.equals(this.position()))
+        sendTickFXPackets(this.playerList, this, 128.0D);
+
+
+        //previousPosition = this.position();
 
 
         try {
@@ -126,6 +125,8 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
             this.move(MoverType.PLAYER, new Vec3(this.caster.position().x, this.position().y, this.caster.position().z));
         }
 
+
+
     }
 
 
@@ -134,10 +135,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
 
     public void scheduleRemoval() {
         removeNextTick = true;
-        if(!this.level().isClientSide){
-            sendEndFXPackets(this.playerList,this);
-        }
-
     }
 
     static Gson GSON = new Gson();

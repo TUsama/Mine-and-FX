@@ -5,7 +5,7 @@ import com.clefal.mmofx.common.packets.C2SPacketRegister;
 import com.clefal.mmofx.common.packets.S2CPacketRegister;
 import com.clefal.mmofx.common.packets.askForFXConfigPacket;
 import com.clefal.mmofx.common.spellmodify.FXMapField;
-import com.clefal.mmofx.common.spellmodify.SpellModifierFactory;
+import com.clefal.mmofx.common.spellmodify.SpellModifiers;
 import com.clefal.mmofx.registers.EntityRegister;
 import com.clefal.mmofx.registers.FXRenderRegister;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
@@ -36,8 +36,8 @@ public class ModMain {
     EntityRegister.init();
     S2CPacketRegister.register();
     C2SPacketRegister.register();
+    SpellModifiers.init();
     FXMapField.init();
-    SpellModifierFactory.init();
     FXCache.init();
 
     FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
