@@ -15,7 +15,7 @@ public class AttachedSpellMixin {
     @Inject(method = "onCast", at = @At(value = "HEAD"), remap = false)
     private void injectFXEntity(SpellCtx ctx, CallbackInfo ci){
         Optional.ofNullable(new SpellModifiers().getModifier(ctx.calculatedSpellData.getSpell().identifier))
-                .ifPresent(spellModifier -> spellModifier.onCast
-                                .forEach(x -> x.tryActivate(ctx)));
+                .map(spellModifier -> spellModifier.onCast)
+                .ifPresent(componentParts -> componentParts.forEach(y -> y.tryActivate(ctx)));
     }
 }

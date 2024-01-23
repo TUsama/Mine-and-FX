@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.ComponentPart;
 import lombok.Builder;
 import lombok.Singular;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
@@ -12,7 +13,10 @@ import java.util.function.Supplier;
 public class SpellModifier {
 
     @Singular(value = "onCast", ignoreNullCollections = true)
+    @Nullable
     public List<ComponentPart> onCast;
+    @Builder.Default
+    public DisableOption disableOption = new DisableOption();
 
     public String identifier;
 

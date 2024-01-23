@@ -43,11 +43,16 @@ public class SpellModifiers {
                     .put(MapField.HEIGHT, 0.5D)))
             .build();
 
+    public SpellModifier poisonBall = SpellModifier.builder()
+            .disableOption(new DisableOption().setDisableItemRender(true))
+            .build();
+
     private HashMap<String, Supplier<SpellModifier>> loadIn(){
         fireNova.load(modifiers);
         frostNova.load(modifiers);
         heartOfIce.load(modifiers);
         gongStrike.load(modifiers);
+        poisonBall.load(modifiers);
         return modifiers;
     }
 }
