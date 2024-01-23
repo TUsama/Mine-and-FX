@@ -12,6 +12,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle' version '[6.0.18,6.2)'
+    id "me.modmuss50.mod-publish-plugin" version "0.4.5"
 }
 
 apply plugin: 'org.spongepowered.mixin'
@@ -248,4 +249,21 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+publishMods {
+    file = jar.archiveFile
+    modLoaders.add("forge")
+    changelog = file("Changelog.txt").text
+    type = BETA
+
+    curseforge {
+        accessToken = file("Key.txt").text
+        projectId = "964086"
+        minecraftVersions.add("1.20.1")
+
+        requires { slug = "mine-and-slash-reloaded" }
+        requires { slug = "photon" }
+    }
+
 }
