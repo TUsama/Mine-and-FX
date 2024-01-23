@@ -9,12 +9,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Mixin(AttachedSpell.class)
 public class AttachedSpellMixin {
     @Inject(method = "onCast", at = @At(value = "HEAD"), remap = false)
     private void injectFXEntity(SpellCtx ctx, CallbackInfo ci){
-        Optional.ofNullable(new SpellModifiers().getModifier(ctx.calculatedSpellData.getSpell().identifier))
+        new SpellModifiers().getModifier(ctx.calculatedSpellData.getSpell().identifier)
+                .map(Supplier::get)
                 .map(spellModifier -> spellModifier.onCast)
                 .ifPresent(componentParts -> componentParts.forEach(y -> y.tryActivate(ctx)));
     }

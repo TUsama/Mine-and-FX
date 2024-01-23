@@ -1,6 +1,5 @@
 package com.clefal.mmofx.mixins;
 
-import com.clefal.mmofx.common.spellmodify.DisableOption;
 import com.clefal.mmofx.common.spellmodify.SpellModifiers;
 import com.clefal.mmofx.entity.IFXSender;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
@@ -18,15 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.function.Supplier;
 
 @Mixin(SimpleProjectileEntity.class)
 public abstract class SimpleProjectileEntityMixin implements IFXSender {
-    @Shadow public abstract CalculatedSpellData getSpellData();
+    @Shadow(remap = false)
+    public abstract CalculatedSpellData getSpellData();
 
     @Unique
-List<ServerPlayer> mine_and_FX$playerList = new ArrayList<>();
+    List<ServerPlayer> mine_and_FX$playerList = new ArrayList<>();
     @Inject(method = "tick", at = @At(value = "HEAD"))
     public void injectTick(CallbackInfo ci){
     SimpleProjectileEntity en = (SimpleProjectileEntity)(Object)this;
@@ -38,14 +37,14 @@ List<ServerPlayer> mine_and_FX$playerList = new ArrayList<>();
         SimpleProjectileEntity en = (SimpleProjectileEntity)(Object)this;
         sendEndFXPackets(mine_and_FX$playerList, en);
     }
-    @Inject(method = "getItem", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "getItem", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private void mine_and_fx$modify_getItem(CallbackInfoReturnable<ItemStack> cir){
         SimpleProjectileEntity en = (SimpleProjectileEntity)(Object)this;
-        Stream.of(Optional.ofNullable(new SpellModifiers().getModifier(this.getSpellData().getSpell().identifier))
+        new SpellModifiers().getModifier(this.getSpellData().getSpell().identifier)
+                .map(Supplier::get)
                 .map(spellModifier -> spellModifier.disableOption)
-                .orElseGet(() -> new DisableOption().setDisableItemRender(true)))
                 .filter(disableOption -> disableOption.disableItemRender)
-                .forEach(x -> cir.setReturnValue(new ItemStack(Items.AIR)));
+                .ifPresent(x -> cir.setReturnValue(new ItemStack(Items.AIR)));
 
     }
 }

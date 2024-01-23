@@ -2,21 +2,21 @@ package com.clefal.mmofx.common.spellmodify;
 
 import com.clefal.mmofx.common.spellaction.FXSpellAction;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.BasicAttackSpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.FireSpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.HolySpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class SpellModifiers {
     public HashMap<String, Supplier<SpellModifier>> modifiers = new HashMap<>();
 
-    @Nullable
-    public SpellModifier getModifier(String identifier){
-        return loadIn().get(identifier).get();
+    public Optional<Supplier<SpellModifier>> getModifier(String identifier){
+        return Optional.ofNullable(loadIn().get(identifier));
     }
 
     public SpellModifier fireNova = SpellModifier.builder()
@@ -44,6 +44,7 @@ public class SpellModifiers {
             .build();
 
     public SpellModifier poisonBall = SpellModifier.builder()
+            .identifier(BasicAttackSpells.POISONBALL_ID)
             .disableOption(new DisableOption().setDisableItemRender(true))
             .build();
 
