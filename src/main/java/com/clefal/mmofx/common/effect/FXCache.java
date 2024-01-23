@@ -2,6 +2,7 @@ package com.clefal.mmofx.common.effect;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.BasicAttackSpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.FireSpells;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.HolySpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 
 import java.util.ArrayList;
@@ -20,7 +21,9 @@ public class FXCache {
 
                 //NatureSpells.REFRESH
 
-                FireSpells.FIRE_NOVA_ID
+                FireSpells.FIRE_NOVA_ID,
+
+                HolySpells.GONG_STRIKE_ID
 
 
         );

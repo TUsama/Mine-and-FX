@@ -1,6 +1,7 @@
 package com.clefal.mmofx.mixins;
 
 import com.clefal.mmofx.common.data.FXInfoHolder;
+import com.clefal.mmofx.common.effect.ConcurrentFXHelper;
 import com.clefal.mmofx.common.packets.SpellParticlePacket;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleInRadiusAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
@@ -18,10 +19,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.clefal.mmofx.common.data.FXUtilities.getPlayerWithinRange;
-import static com.clefal.mmofx.common.effect.FXCache.FX_CACHE;
+import static com.clefal.mmofx.common.data.FXUtilities.getResFromRawString;
 
 
 @Mixin(value = ParticleInRadiusAction.class)
@@ -42,7 +44,7 @@ public class ParticleInRadiusActionMixin{
                         if(!key){
                             value.forEach(serverPlayer -> Packets.sendToClient(serverPlayer, new SpellParticlePacket(original, particle, new MyPosition(vel))));
                         }
-                        if(!FX_CACHE.contains(ctx.calculatedSpellData.getSpell().identifier)){
+                        if(Optional.ofNullable(ConcurrentFXHelper.getFX(getResFromRawString(ctx.calculatedSpellData.getSpell().identifier))).isEmpty()){
                             value.forEach(serverPlayer -> Packets.sendToClient(serverPlayer, new SpellParticlePacket(original, particle, new MyPosition(vel))));
                         }
                     });

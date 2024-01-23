@@ -13,7 +13,7 @@ import java.util.List;
 public class FXUtilities {
 
 
-    public static ResourceLocation getSkillFXFromRawString(String txt) {
+    public static ResourceLocation getResFromRawString(String txt) {
         return new ResourceLocation("mmofx:" + txt);
     }
 

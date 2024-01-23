@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.clefal.mmofx.common.data.FXInfoHolder.clientPlayerEntityFXHolder;
-import static com.clefal.mmofx.common.data.FXUtilities.getSkillFXFromRawString;
+import static com.clefal.mmofx.common.data.FXUtilities.getResFromRawString;
 
 public class sendSpellEntityPositionPacket extends MyPacket<sendSpellEntityPositionPacket> {
 
@@ -56,7 +56,7 @@ public class sendSpellEntityPositionPacket extends MyPacket<sendSpellEntityPosit
     public void onReceived(ExilePacketContext ctx) {
 
         Optional.ofNullable(clientPlayerEntityFXHolder.computeIfAbsent(this.entityUUID, x -> {
-            FX FXResource = FXHelper.getFX(getSkillFXFromRawString(skillIdentifier));
+            FX FXResource = FXHelper.getFX(getResFromRawString(skillIdentifier));
             return FXResource == null ? null : new PositionEffect(this.entityUUID, FXResource, pos).startAndReturn(true);
         })).ifPresent(positionEffect -> {
             positionEffect.setNewPos(this.pos);
