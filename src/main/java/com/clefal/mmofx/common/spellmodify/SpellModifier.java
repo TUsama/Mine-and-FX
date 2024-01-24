@@ -11,21 +11,19 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @Builder
+
 public class SpellModifier {
 
     @Singular(value = "onCast", ignoreNullCollections = true)
     @Nullable
     public List<ComponentPart> onCast;
-    @Builder.Default
-    public DisableOption disableOption = new DisableOption();
+    @Nullable
+    public DisableOption disableOption;
+    @NotNull
     public String identifier;
 
     public void load(HashMap<String, Supplier<SpellModifier>> map){
-        if (identifier != null) {
-            map.put(identifier, () -> this);
-        } else {
-            throw new NullPointerException("load a SpellModifier with null identifier!");
-        }
+        map.put(identifier, () -> this);
     }
 
 

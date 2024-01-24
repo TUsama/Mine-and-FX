@@ -8,13 +8,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 @Mixin(AttachedSpell.class)
 public class AttachedSpellMixin {
     @Inject(method = "onCast", at = @At(value = "HEAD"), remap = false)
-    private void injectFXEntity(SpellCtx ctx, CallbackInfo ci){
+    private void injectFXEntity(SpellCtx ctx, CallbackInfo ci) {
         new SpellModifiers().getModifier(ctx.calculatedSpellData.getSpell().identifier)
                 .map(Supplier::get)
                 .map(spellModifier -> spellModifier.onCast)
