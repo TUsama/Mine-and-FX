@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 public class SpellModifiers {
     public HashMap<String, Supplier<SpellModifier>> modifiers = new HashMap<>();
 
-    public Optional<Supplier<SpellModifier>> getModifier(String identifier){
-        return Optional.ofNullable(loadIn().get(identifier));
+    public static Optional<Supplier<SpellModifier>> getModifier(String identifier){
+        return Optional.ofNullable(new SpellModifiers().loadIn().get(identifier));
     }
 
     public SpellModifier fireNova = SpellModifier.builder()

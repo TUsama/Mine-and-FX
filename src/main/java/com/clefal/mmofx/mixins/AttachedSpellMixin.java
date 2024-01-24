@@ -10,11 +10,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Supplier;
 
+import static com.clefal.mmofx.common.spellmodify.SpellModifiers.getModifier;
+
 @Mixin(AttachedSpell.class)
 public class AttachedSpellMixin {
     @Inject(method = "onCast", at = @At(value = "HEAD"), remap = false)
     private void injectFXEntity(SpellCtx ctx, CallbackInfo ci) {
-        new SpellModifiers().getModifier(ctx.calculatedSpellData.getSpell().identifier)
+        getModifier(ctx.calculatedSpellData.getSpell().identifier)
                 .map(Supplier::get)
                 .map(spellModifier -> spellModifier.onCast)
                 .ifPresent(componentParts -> componentParts.forEach(y -> y.tryActivate(ctx)));

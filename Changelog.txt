@@ -1,1 +1,4 @@
+v0.0.4
+- add poison ball FX
+<br/>
 v 0.0.3 add Gong Strike FX

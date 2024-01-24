@@ -5,10 +5,10 @@
   "package": "com.clefal.mmofx.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "StationaryFallingBlockEntityMixin",
-    "SimpleProjectileEntityMixin",
+    "ProjectileCastHelperMixin",
     "ParticleInRadiusActionMixin",
-    "AttachedSpellMixin"
+    "AttachedSpellMixin",
+    "ClientLevelMixin"
 
   ],
   "client": [

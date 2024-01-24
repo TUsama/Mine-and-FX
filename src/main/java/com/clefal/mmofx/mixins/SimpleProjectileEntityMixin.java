@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.clefal.mmofx.common.spellmodify.SpellModifiers.getModifier;
+
 @Mixin(SimpleProjectileEntity.class)
 public abstract class SimpleProjectileEntityMixin implements IFXSender {
     @Shadow(remap = false)
@@ -40,7 +42,7 @@ public abstract class SimpleProjectileEntityMixin implements IFXSender {
     @Inject(method = "getItem", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private void mine_and_fx$modify_getItem(CallbackInfoReturnable<ItemStack> cir){
         SimpleProjectileEntity en = (SimpleProjectileEntity)(Object)this;
-        new SpellModifiers().getModifier(this.getSpellData().getSpell().identifier)
+        getModifier(this.getSpellData().getSpell().identifier)
                 .map(Supplier::get)
                 .map(spellModifier -> spellModifier.disableOption)
                 .filter(disableOption -> disableOption.disableItemRender)
