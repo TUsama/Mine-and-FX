@@ -56,17 +56,11 @@ public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
         Optional<FX> FXResource = Optional.ofNullable(FXHelper.getFX(getResFromRawString(skillIdentifier)));
-        Minecraft.getInstance().player.displayClientMessage(Component.literal("current world is:" + ctx.getPlayer().level() + ", and get a name:" + skillIdentifier + ", exist:" + FXResource.isPresent()), false);
         if (FXResource.isPresent()) {
             Iterable<Entity> entities = ((ClientLevel) ctx.getPlayer().level()).entitiesForRendering();
-            Minecraft.getInstance().player.displayClientMessage(Component.literal("gained all entity!"), false);
             entities.forEach(x -> {
                 if (x.getUUID().equals(entityUUID)) {
-                    Minecraft.getInstance().player.displayClientMessage(Component.literal("a Entity matched!"), false);
                     new EntityEffect(FXResource.get(), ctx.getPlayer().level(), x).start();
-                } else {
-                    Minecraft.getInstance().player.displayClientMessage(Component.literal("found one but don't matched! the UUID got is " + entityUUID + ", but found one is " + x.getUUID()), false);
-
                 }
             });
         }
