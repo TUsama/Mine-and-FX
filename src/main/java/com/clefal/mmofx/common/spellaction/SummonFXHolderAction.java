@@ -1,5 +1,7 @@
 package com.clefal.mmofx.common.spellaction;
 
+import com.clefal.mmofx.common.data.FXInfoHolder;
+import com.clefal.mmofx.common.packets.SpellEntityInitPacket;
 import com.clefal.mmofx.common.spellmodify.FXMapField;
 import com.clefal.mmofx.entity.FXEntity;
 import com.clefal.mmofx.registers.EntityRegister;
@@ -9,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,13 +50,14 @@ public class SummonFXHolderAction extends SpellAction {
                 FXEntity en = new FXEntity(world, true);
                 SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
                 en.setPos(finalPos);
-                /*getPlayerWithinRange(finalPos, world, 128.0D)
+                ctx.world.addFreshEntity(en);
+                getPlayerWithinRange(finalPos, world, 128.0D)
                         .stream()
                         .filter(FXInfoHolder::readFXConfigValue)
                         .toList()
                         .forEach(serverPlayer ->
-                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(FXMapField.SKILL_FX))));
-                */ctx.world.addFreshEntity(en);
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
+
 
             } else {
 
@@ -61,6 +65,13 @@ public class SummonFXHolderAction extends SpellAction {
                 SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
                 en.setPos(finalPos);
                 ctx.world.addFreshEntity(en);
+                getPlayerWithinRange(finalPos, world, 128.0D)
+                        .stream()
+                        .filter(FXInfoHolder::readFXConfigValue)
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
+
             }
         }}
     }
