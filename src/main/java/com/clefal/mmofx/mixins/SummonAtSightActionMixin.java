@@ -35,7 +35,7 @@ public class SummonAtSightActionMixin {
                     shift = At.Shift.AFTER
             ),
             remap = false,
-            locals = LocalCapture.CAPTURE_FAILHARD
+            locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private void getEntityUUIDAndPos(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data, CallbackInfo ci, Optional projectile, Double distance, Double height, HitResult ray, Vec3 pos, Entity en, @Share("entity") LocalRef<Entity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx) {
         entity.set(en);
@@ -49,6 +49,9 @@ public class SummonAtSightActionMixin {
             remap = false
     )
     public void sendFXNotification(CallbackInfo ci, @Share("entity") LocalRef<Entity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx) {
+        if (entity == null || finalPosition == null || sctx == null) {
+            return;
+        }
         getPlayerWithinRange(finalPosition.get(), sctx.get().world, 128.0D)
                 .stream()
                 .filter(FXInfoHolder::readFXConfigValue)

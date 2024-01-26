@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderAsItem, IFXSender {
+public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderAsItem{
 
     CalculatedSpellData spellData;
     private Integer lifeSpan = 0;
@@ -82,7 +82,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
                     .getAttached()
                     .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
         }
-        //sendEndFXPackets(this.playerList,this);
         super.remove(r);
     }
 
@@ -99,13 +98,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
         if (this.lifeSpan >= getDeathTime()) {
             this.scheduleRemoval();
         }
-
-        //if(!previousPosition.equals(this.position()))
-        //sendTickFXPackets(this.playerList, this, 128.0D);
-
-
-        //previousPosition = this.position();
-
 
         try {
             super.tick();

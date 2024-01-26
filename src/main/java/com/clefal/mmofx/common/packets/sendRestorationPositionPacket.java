@@ -22,7 +22,7 @@ public class sendRestorationPositionPacket extends MyPacket<sendRestorationPosit
 
     String resourceType;
 
-    Vector3f pos = new Vector3f(0,0,0);
+    Vector3f pos = new Vector3f(0, 0, 0);
 
     public sendRestorationPositionPacket(UUID entityUUID, String resourceType, Vector3f pos) {
         this.entityUUID = entityUUID;

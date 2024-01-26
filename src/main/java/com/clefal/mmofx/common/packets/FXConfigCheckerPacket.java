@@ -13,12 +13,12 @@ public class FXConfigCheckerPacket extends MyPacket<FXConfigCheckerPacket> {
 
     public Boolean ifFXEnable;
 
-    public FXConfigCheckerPacket(){
+    public FXConfigCheckerPacket() {
     }
 
 
     @Override
-    public ResourceLocation getIdentifier()  {
+    public ResourceLocation getIdentifier() {
         return new ResourceLocation(SlashRef.MODID, "fxconfigchecker");
     }
 

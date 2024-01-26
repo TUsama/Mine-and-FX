@@ -2,14 +2,11 @@ package com.clefal.mmofx.mixins;
 
 import com.clefal.mmofx.common.data.FXInfoHolder;
 import com.clefal.mmofx.common.packets.SpellEntityInitPacket;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
@@ -45,7 +42,7 @@ public class ProjectileCastHelperMixin {
                     shift = At.Shift.AFTER
             ),
             remap = false,
-            locals = LocalCapture.CAPTURE_FAILHARD
+            locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private void getEntityUUIDAndPos(CallbackInfo ci, Level world, float addYaw, Vec3 posAdd, int i, Vec3 vec31, Quaternionf quaternionf, Vec3 vec3, Vector3f finalVel, AbstractArrow en, @Share("entity") LocalRef<AbstractArrow> entity, @Share("pos") LocalRef<Vec3> finalPosition){
         entity.set(en);
@@ -58,6 +55,9 @@ public class ProjectileCastHelperMixin {
             remap = false
     )
     public void sendFXNotification(CallbackInfo ci, @Share("entity") LocalRef<AbstractArrow> entity, @Share("pos") LocalRef<Vec3> finalPosition) {
+        if (entity == null || finalPosition == null) {
+            return;
+        }
         getPlayerWithinRange(finalPosition.get(), caster.level(), 128.0D)
                 .stream()
                 .filter(FXInfoHolder::readFXConfigValue)

@@ -36,7 +36,7 @@ public class SummonBlockActionMixin {
                     shift = At.Shift.AFTER
             ),
             remap = false,
-            locals = LocalCapture.CAPTURE_FAILHARD
+            locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private void getEntityUUIDAndPos(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data, CallbackInfo ci, MyPosition pos, float yoff, float xoff, float zoff, boolean found, Block block, StationaryFallingBlockEntity be, @Share("entity") LocalRef<StationaryFallingBlockEntity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx, @Share("checkif") LocalBooleanRef ifFound) {
         entity.set(be);
@@ -51,6 +51,9 @@ public class SummonBlockActionMixin {
             remap = false
     )
     public void sendFXNotification(CallbackInfo ci, @Share("entity") LocalRef<StationaryFallingBlockEntity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx, @Share("checkif") LocalBooleanRef ifFound) {
+        if (entity == null || finalPosition == null || sctx == null || ifFound == null) {
+            return;
+        }
         getPlayerWithinRange(finalPosition.get(), sctx.get().world, 128.0D)
                 .stream()
                 .filter(FXInfoHolder::readFXConfigValue)

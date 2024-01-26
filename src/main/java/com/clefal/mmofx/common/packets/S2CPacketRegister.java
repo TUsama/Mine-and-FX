@@ -5,14 +5,12 @@ import com.robertx22.library_of_exile.main.Packets;
 
 public class S2CPacketRegister {
 
-        public static void register() {
-            int i = 2000;
+    public static void register() {
+        int i = 2000;
 
-            Packets.registerServerToClient(MMORPG.NETWORK, new askForFXConfigPacket(), i++);
-            Packets.registerServerToClient(MMORPG.NETWORK, new sendSpellEntityPositionPacket(), i++);
-            Packets.registerServerToClient(MMORPG.NETWORK, new sendSpellEntityDeath(), i++);
-            Packets.registerServerToClient(MMORPG.NETWORK, new SpellParticlePacket(), i++);
-            Packets.registerServerToClient(MMORPG.NETWORK, new SpellEntityInitPacket(), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new askForFXConfigPacket(), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new SpellParticlePacket(), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new SpellEntityInitPacket(), i++);
 
     }
 }

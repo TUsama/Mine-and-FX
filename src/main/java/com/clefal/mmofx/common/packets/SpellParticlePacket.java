@@ -21,10 +21,11 @@ public class SpellParticlePacket extends MyPacket<SpellParticlePacket> {
         this.vel = vel;
     }
 
-    public SpellParticlePacket(){
+    public SpellParticlePacket() {
     }
+
     @Override
-    public ResourceLocation getIdentifier()  {
+    public ResourceLocation getIdentifier() {
         return new ResourceLocation(SlashRef.MODID, "spellparticle");
     }
 
