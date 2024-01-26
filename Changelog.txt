@@ -1,4 +1,5 @@
 v0.0.4
-- add poison ball FX
+- add poison ball FX<br/>
+- add a condition to fix the compat problem with CTE2, now if the spell already have a summon action, like the new Fire Orb in CTE2, the original self-cast FX won't active anymore.<br/>
 <br/>
 v 0.0.3 add Gong Strike FX

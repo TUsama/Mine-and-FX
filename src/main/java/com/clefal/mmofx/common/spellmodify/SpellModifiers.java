@@ -16,22 +16,27 @@ public class SpellModifiers {
     public HashMap<String, Supplier<SpellModifier>> modifiers = new HashMap<>();
     public SpellModifier fireNova = SpellModifier.builder()
             .identifier(FireSpells.FIRE_NOVA_ID)
-            .onCast(PartBuilder.justAction(FXSpellAction.FX_HOLDER.createFXHolder(30d, FireSpells.FIRE_NOVA_ID + "_FX_entity").put(MapField.HEIGHT, 0.5D)))
+            .onCast(PartBuilder.justAction(FXSpellAction.FX_HOLDER.createFXHolder(30d, FireSpells.FIRE_NOVA_ID + "_FX_entity")
+                    .put(MapField.HEIGHT, 0.5D)))
+            .onlyWorkWhenNonOtherSummonAction(true)
             .build();
     public SpellModifier frostNova = SpellModifier.builder()
             .identifier(WaterSpells.FROST_NOVA_AOE)
             .onCast(PartBuilder.justAction(FXSpellAction.FX_HOLDER.createFXHolder(30d, WaterSpells.FROST_NOVA_AOE + "_FX_entity")
                     .put(MapField.HEIGHT, 0.5D)))
+            .onlyWorkWhenNonOtherSummonAction(true)
             .build();
     public SpellModifier heartOfIce = SpellModifier.builder()
             .identifier(WaterSpells.HEART_OF_ICE)
             .onCast(PartBuilder.justAction(FXSpellAction.FX_HOLDER.createFXHolder(20D * 2, WaterSpells.HEART_OF_ICE + "_FX_entity")
                     .put(MapField.HEIGHT, 0.5D)))
+            .onlyWorkWhenNonOtherSummonAction(true)
             .build();
     public SpellModifier gongStrike = SpellModifier.builder()
             .identifier(HolySpells.GONG_STRIKE_ID)
             .onCast(PartBuilder.justAction(FXSpellAction.FX_HOLDER.createFXHolder(30d, HolySpells.GONG_STRIKE_ID + "_FX_entity")
                     .put(MapField.HEIGHT, 0.5D)))
+            .onlyWorkWhenNonOtherSummonAction(true)
             .build();
     public SpellModifier poisonBall = SpellModifier.builder()
             .identifier(BasicAttackSpells.POISONBALL_ID)

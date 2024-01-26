@@ -18,6 +18,8 @@ public class SpellModifier {
     @Nullable
     public List<ComponentPart> onCast;
     @Nullable
+    public Boolean onlyWorkWhenNonOtherSummonAction;
+    @Nullable
     public DisableOption disableOption;
     @NotNull
     public String identifier;

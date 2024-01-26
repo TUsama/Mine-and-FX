@@ -43,35 +43,33 @@ public class SummonFXHolderAction extends SpellAction {
 
             Level world = ctx.caster.level();
 
-            if (data.has(FXMapField.SKILL_FX)) {
 
-                if (data.getOrDefault(FXMapField.IS_ENTITY_EFFECT, false)) {
-                    FXEntity en = new FXEntity(world, true);
-                    SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
-                    en.setPos(finalPos);
-                    ctx.world.addFreshEntity(en);
-                    getPlayerWithinRange(finalPos, world, 128.0D)
-                            .stream()
-                            .filter(FXInfoHolder::readFXConfigValue)
-                            .toList()
-                            .forEach(serverPlayer ->
-                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
+            if (data.getOrDefault(FXMapField.IS_ENTITY_EFFECT, false)) {
+                FXEntity en = new FXEntity(world, true);
+                SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                en.setPos(finalPos);
+                ctx.world.addFreshEntity(en);
+                getPlayerWithinRange(finalPos, world, 128.0D)
+                        .stream()
+                        .filter(FXInfoHolder::readFXConfigValue)
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
 
 
-                } else {
+            } else {
 
-                    FXEntity en = new FXEntity(world, false);
-                    SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
-                    en.setPos(finalPos);
-                    ctx.world.addFreshEntity(en);
-                    getPlayerWithinRange(finalPos, world, 128.0D)
-                            .stream()
-                            .filter(FXInfoHolder::readFXConfigValue)
-                            .toList()
-                            .forEach(serverPlayer ->
-                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
+                FXEntity en = new FXEntity(world, false);
+                SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                en.setPos(finalPos);
+                ctx.world.addFreshEntity(en);
+                getPlayerWithinRange(finalPos, world, 128.0D)
+                        .stream()
+                        .filter(FXInfoHolder::readFXConfigValue)
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
 
-                }
             }
         }
     }
