@@ -10,7 +10,7 @@ public class S2CPacketRegister {
 
         Packets.registerServerToClient(MMORPG.NETWORK, new askForFXConfigPacket(), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new SpellParticlePacket(), i++);
-        Packets.registerServerToClient(MMORPG.NETWORK, new SpellEntityInitPacket(), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new SpellFXInitPacket(), i++);
 
     }
 }

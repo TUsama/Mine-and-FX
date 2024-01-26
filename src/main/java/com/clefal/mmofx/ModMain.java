@@ -1,5 +1,6 @@
 package com.clefal.mmofx;
 
+import com.clefal.mmofx.common.data.FXInfoHolder;
 import com.clefal.mmofx.common.packets.C2SPacketRegister;
 import com.clefal.mmofx.common.packets.S2CPacketRegister;
 import com.clefal.mmofx.common.packets.askForFXConfigPacket;
@@ -31,6 +32,7 @@ public class ModMain {
   public static final Logger LOGGER = LogManager.getLogger();
 
   public ModMain() {
+    FXInfoHolder.init();
     EntityRegister.init();
     S2CPacketRegister.register();
     C2SPacketRegister.register();

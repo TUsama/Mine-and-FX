@@ -11,12 +11,13 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.UUID;
 
 import static com.clefal.mmofx.common.data.FXUtilities.getResFromRawString;
 
-public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
+public class SpellFXInitPacket extends MyPacket<SpellFXInitPacket> {
 
     UUID entityUUID = null;
 
@@ -25,20 +26,20 @@ public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
     Boolean allowMulti;
 
 
-    public SpellEntityInitPacket(UUID entityUUID, String skillFXName) {
+    public SpellFXInitPacket(UUID entityUUID, String skillFXName) {
         this.entityUUID = entityUUID;
         this.skillIdentifier = skillFXName;
         this.allowMulti = true;
     }
 
-    public SpellEntityInitPacket(UUID entityUUID, String skillFXName, Boolean allowMulti) {
+    public SpellFXInitPacket(UUID entityUUID, String skillFXName, Boolean allowMulti) {
         this.entityUUID = entityUUID;
         this.skillIdentifier = skillFXName;
         this.allowMulti = allowMulti;
     }
 
 
-    public SpellEntityInitPacket() {
+    public SpellFXInitPacket() {
     }
 
     @Override
@@ -76,7 +77,7 @@ public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
     }
 
     @Override
-    public MyPacket<SpellEntityInitPacket> newInstance() {
-        return new SpellEntityInitPacket();
+    public MyPacket<SpellFXInitPacket> newInstance() {
+        return new SpellFXInitPacket();
     }
 }

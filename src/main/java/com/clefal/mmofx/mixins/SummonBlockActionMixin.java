@@ -1,7 +1,7 @@
 package com.clefal.mmofx.mixins;
 
 import com.clefal.mmofx.common.data.FXInfoHolder;
-import com.clefal.mmofx.common.packets.SpellEntityInitPacket;
+import com.clefal.mmofx.common.packets.SpellFXInitPacket;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -59,7 +59,7 @@ public class SummonBlockActionMixin {
                 .filter(FXInfoHolder::readFXConfigValue)
                 .toList()
                 .forEach(serverPlayer -> {
-                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(entity.get().getUUID(), sctx.get().calculatedSpellData.getSpell().identifier));
+                    Packets.sendToClient(serverPlayer, new SpellFXInitPacket(entity.get().getUUID(), sctx.get().calculatedSpellData.getSpell().identifier));
                 });
 
     }

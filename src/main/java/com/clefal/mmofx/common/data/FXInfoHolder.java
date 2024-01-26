@@ -1,19 +1,14 @@
 package com.clefal.mmofx.common.data;
 
 import com.clefal.mmofx.ConfigManager;
-import com.clefal.mmofx.common.effect.PositionEffect;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class FXInfoHolder {
 
-    public static Map<UUID, PositionEffect> clientPlayerEntityFXHolder = new ConcurrentHashMap<>() {
-    };
     private static Map<UUID, Boolean> playerFXEnableMap = new HashMap<>();
 
     public static void writeFXConfigValue(Player player){

@@ -29,6 +29,7 @@ public class AttachedSpellMixin {
         HashSet<String> holderType = new HashSet<>();
         on_cast.forEach(x -> x.acts.forEach(y -> holderType.add(y.type)));
         Predicate<String> checkIfOtherSummonActionExist = x -> x.equals("projectile") || x.equals("summon_block") || x.equals("summon_at_sight");
+
         getModifier(ctx.calculatedSpellData.getSpell().identifier)
                 .map(Supplier::get)
                 .filter(spellModifier -> !(Boolean.TRUE.equals(spellModifier.onlyWorkWhenNonOtherSummonAction) && holderType.stream().anyMatch(checkIfOtherSummonActionExist)))

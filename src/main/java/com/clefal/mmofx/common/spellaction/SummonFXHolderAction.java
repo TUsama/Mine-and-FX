@@ -1,7 +1,7 @@
 package com.clefal.mmofx.common.spellaction;
 
 import com.clefal.mmofx.common.data.FXInfoHolder;
-import com.clefal.mmofx.common.packets.SpellEntityInitPacket;
+import com.clefal.mmofx.common.packets.SpellFXInitPacket;
 import com.clefal.mmofx.common.spellmodify.FXMapField;
 import com.clefal.mmofx.entity.FXEntity;
 import com.clefal.mmofx.registers.EntityRegister;
@@ -54,7 +54,7 @@ public class SummonFXHolderAction extends SpellAction {
                         .filter(FXInfoHolder::readFXConfigValue)
                         .toList()
                         .forEach(serverPlayer ->
-                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
+                                Packets.sendToClient(serverPlayer, new SpellFXInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
 
 
             } else {
@@ -68,7 +68,7 @@ public class SummonFXHolderAction extends SpellAction {
                         .filter(FXInfoHolder::readFXConfigValue)
                         .toList()
                         .forEach(serverPlayer ->
-                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
+                                Packets.sendToClient(serverPlayer, new SpellFXInitPacket(en.getUUID(), ctx.calculatedSpellData.getSpell().identifier)));
 
             }
         }
