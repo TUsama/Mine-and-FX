@@ -6,17 +6,13 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonAtSightAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonBlockAction;
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import static com.clefal.mmofx.common.data.FXUtilities.getPlayerWithinRange;
 
@@ -43,7 +38,7 @@ public class SummonBlockActionMixin {
             remap = false,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void getEntityUUIDAndPos(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data, CallbackInfo ci, MyPosition pos, float yoff, float xoff, float zoff, boolean found, Block block, StationaryFallingBlockEntity be, @Share("entity") LocalRef<StationaryFallingBlockEntity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx, @Share("checkif") LocalBooleanRef ifFound){
+    private void getEntityUUIDAndPos(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data, CallbackInfo ci, MyPosition pos, float yoff, float xoff, float zoff, boolean found, Block block, StationaryFallingBlockEntity be, @Share("entity") LocalRef<StationaryFallingBlockEntity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx, @Share("checkif") LocalBooleanRef ifFound) {
         entity.set(be);
         finalPosition.set(pos);
         sctx.set(ctx);

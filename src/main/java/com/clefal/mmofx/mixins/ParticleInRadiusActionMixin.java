@@ -44,7 +44,7 @@ public class ParticleInRadiusActionMixin{
                         if(!key){
                             value.forEach(serverPlayer -> Packets.sendToClient(serverPlayer, new SpellParticlePacket(original, particle, new MyPosition(vel))));
                         }
-                        if(Optional.ofNullable(ConcurrentFXHelper.getFX(getResFromRawString(ctx.calculatedSpellData.getSpell().identifier))).isEmpty()){
+                        if(ConcurrentFXHelper.getFX(getResFromRawString(ctx.calculatedSpellData.getSpell().identifier)) == null){
                             value.forEach(serverPlayer -> Packets.sendToClient(serverPlayer, new SpellParticlePacket(original, particle, new MyPosition(vel))));
                         }
                     });

@@ -5,21 +5,14 @@ import com.clefal.mmofx.common.packets.SpellEntityInitPacket;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
-import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonAtSightAction;
-import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -44,7 +37,7 @@ public class SummonAtSightActionMixin {
             remap = false,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void getEntityUUIDAndPos(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data, CallbackInfo ci, Optional projectile, Double distance, Double height, HitResult ray, Vec3 pos, Entity en, @Share("entity") LocalRef<Entity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx){
+    private void getEntityUUIDAndPos(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data, CallbackInfo ci, Optional projectile, Double distance, Double height, HitResult ray, Vec3 pos, Entity en, @Share("entity") LocalRef<Entity> entity, @Share("pos") LocalRef<Vec3> finalPosition, @Share("ctx") LocalRef<SpellCtx> sctx) {
         entity.set(en);
         finalPosition.set(pos);
         sctx.set(ctx);

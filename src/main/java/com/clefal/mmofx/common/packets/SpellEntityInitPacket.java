@@ -13,6 +13,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.entity.EntityTickList;
 
 import java.util.Optional;
@@ -26,10 +27,19 @@ public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
 
     String skillIdentifier = "";
 
+    Boolean allowMulti;
+
 
     public SpellEntityInitPacket(UUID entityUUID, String skillFXName) {
         this.entityUUID = entityUUID;
         this.skillIdentifier = skillFXName;
+        this.allowMulti = true;
+    }
+
+    public SpellEntityInitPacket(UUID entityUUID, String skillFXName, Boolean allowMulti) {
+        this.entityUUID = entityUUID;
+        this.skillIdentifier = skillFXName;
+        this.allowMulti = allowMulti;
     }
 
 
@@ -45,12 +55,14 @@ public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
     public void loadFromData(FriendlyByteBuf buf) {
         this.entityUUID = buf.readUUID();
         this.skillIdentifier = buf.readUtf();
+        this.allowMulti = buf.readBoolean();
     }
 
     @Override
     public void saveToData(FriendlyByteBuf buf) {
         buf.writeUUID(this.entityUUID);
         buf.writeUtf(this.skillIdentifier);
+        buf.writeBoolean(this.allowMulti);
     }
 
     @Override
@@ -60,7 +72,9 @@ public class SpellEntityInitPacket extends MyPacket<SpellEntityInitPacket> {
             Iterable<Entity> entities = ((ClientLevel) ctx.getPlayer().level()).entitiesForRendering();
             entities.forEach(x -> {
                 if (x.getUUID().equals(entityUUID)) {
-                    new EntityEffect(FXResource.get(), ctx.getPlayer().level(), x).start();
+                    EntityEffect entityEffect = new EntityEffect(FXResource.get(), ctx.getPlayer().level(), x);
+                    entityEffect.setAllowMulti(allowMulti);
+                    entityEffect.start();
                 }
             });
         }

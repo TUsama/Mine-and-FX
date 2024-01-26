@@ -14,7 +14,10 @@ import static com.clefal.mmofx.common.spellmodify.SpellModifiers.getModifier;
 
 @Mixin(AttachedSpell.class)
 public class AttachedSpellMixin {
-    @Inject(method = "onCast", at = @At(value = "HEAD"), remap = false)
+    @Inject(method = "onCast",
+            at = @At(value = "HEAD"),
+            remap = false
+    )
     private void injectFXEntity(SpellCtx ctx, CallbackInfo ci) {
         getModifier(ctx.calculatedSpellData.getSpell().identifier)
                 .map(Supplier::get)
